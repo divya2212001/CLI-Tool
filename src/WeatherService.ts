@@ -2,9 +2,6 @@ import axios from 'axios';
 import chalk from 'chalk';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * Weather data interface
- */
 interface WeatherData {
     current_condition: Array<{
         temp_C: string;
@@ -21,9 +18,7 @@ interface WeatherData {
     }>;
 }
 
-/**
- * WeatherService class - handles Weather API integration
- */
+
 export class WeatherService extends BaseCommand {
     private searchHistory: string[];
 
@@ -32,9 +27,7 @@ export class WeatherService extends BaseCommand {
         this.searchHistory = [];
     }
 
-    /**
-     * Get weather information for a city
-     */
+
     async getWeather(city: string): Promise<void> {
         if (!city) {
             this.printError('Please provide a city name');
@@ -77,9 +70,7 @@ export class WeatherService extends BaseCommand {
         }
     }
 
-    /**
-     * Get weather forecast for multiple days
-     */
+
     async getForecast(city: string, days: number = 3): Promise<void> {
         if (!city) {
             this.printError('Please provide a city name');
@@ -103,7 +94,6 @@ export class WeatherService extends BaseCommand {
             console.log(chalk.blue(`\n${days}-Day Weather Forecast for ${area.areaName[0].value}:`));
             console.log(chalk.gray('-'.repeat(50)));
             
-            // Note: wttr.in free tier has limited forecast data
             // Showing current conditions as forecast
             const current = weather.current_condition[0];
             console.log(chalk.green('Current Conditions:'));
@@ -116,9 +106,6 @@ export class WeatherService extends BaseCommand {
         }
     }
 
-    /**
-     * Show search history
-     */
     showHistory(): void {
         if (this.searchHistory.length === 0) {
             this.printInfo('No weather searches yet.');

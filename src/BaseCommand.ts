@@ -1,8 +1,5 @@
 import chalk from 'chalk';
 
-/**
- * Abstract base class for all CLI commands
- */
 export abstract class BaseCommand {
     protected name: string;
     protected description: string;

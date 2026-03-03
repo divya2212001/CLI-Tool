@@ -7,17 +7,11 @@ exports.WeatherService = void 0;
 const axios_1 = __importDefault(require("axios"));
 const chalk_1 = __importDefault(require("chalk"));
 const BaseCommand_1 = require("./BaseCommand");
-/**
- * WeatherService class - handles Weather API integration
- */
 class WeatherService extends BaseCommand_1.BaseCommand {
     constructor() {
         super('weather', 'Get weather information for a city');
         this.searchHistory = [];
     }
-    /**
-     * Get weather information for a city
-     */
     async getWeather(city) {
         if (!city) {
             this.printError('Please provide a city name');
@@ -56,9 +50,6 @@ class WeatherService extends BaseCommand_1.BaseCommand {
             }
         }
     }
-    /**
-     * Get weather forecast for multiple days
-     */
     async getForecast(city, days = 3) {
         if (!city) {
             this.printError('Please provide a city name');
@@ -76,7 +67,6 @@ class WeatherService extends BaseCommand_1.BaseCommand {
             const area = weather.nearest_area[0];
             console.log(chalk_1.default.blue(`\n${days}-Day Weather Forecast for ${area.areaName[0].value}:`));
             console.log(chalk_1.default.gray('-'.repeat(50)));
-            // Note: wttr.in free tier has limited forecast data
             // Showing current conditions as forecast
             const current = weather.current_condition[0];
             console.log(chalk_1.default.green('Current Conditions:'));
@@ -89,9 +79,6 @@ class WeatherService extends BaseCommand_1.BaseCommand {
             this.printError(`Error fetching forecast: ${error.message}`);
         }
     }
-    /**
-     * Show search history
-     */
     showHistory() {
         if (this.searchHistory.length === 0) {
             this.printInfo('No weather searches yet.');

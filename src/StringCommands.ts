@@ -1,9 +1,6 @@
 import chalk from 'chalk';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * StringCommands class - handles all string manipulation operations
- */
 export class StringCommands extends BaseCommand {
     private stringHistory: Array<{ operation: string; input: string; output: string }>;
 
@@ -12,45 +9,30 @@ export class StringCommands extends BaseCommand {
         this.stringHistory = [];
     }
 
-    /**
-     * Convert string to uppercase
-     */
     uppercase(text: string): void {
         const result = text.toUpperCase();
         this.stringHistory.push({ operation: 'uppercase', input: text, output: result });
         console.log(chalk.green('Result: ') + chalk.bold(result));
     }
 
-    /**
-     * Convert string to lowercase
-     */
     lowercase(text: string): void {
         const result = text.toLowerCase();
         this.stringHistory.push({ operation: 'lowercase', input: text, output: result });
         console.log(chalk.green('Result: ') + chalk.bold(result));
     }
 
-    /**
-     * Reverse a string
-     */
     reverse(text: string): void {
         const result = text.split('').reverse().join('');
         this.stringHistory.push({ operation: 'reverse', input: text, output: result });
         console.log(chalk.green('Result: ') + chalk.bold(result));
     }
 
-    /**
-     * Count characters in a string
-     */
     charCount(text: string): void {
         const result = text.length;
         console.log(chalk.green(`Character count: `) + chalk.bold(`${result}`));
         this.printInfo(`Original text: "${text}"`);
     }
 
-    /**
-     * Count words in a string
-     */
     wordCount(text: string): void {
         const words = text.trim().split(/\s+/).filter(word => word.length > 0);
         const result = words.length;
@@ -58,9 +40,7 @@ export class StringCommands extends BaseCommand {
         this.printInfo(`Original text: "${text}"`);
     }
 
-    /**
-     * Check if string is palindrome
-     */
+
     palindrome(text: string): void {
         const cleanText = text.toLowerCase().replace(/[^a-z0-9]/g, '');
         const reversed = cleanText.split('').reverse().join('');
@@ -73,9 +53,6 @@ export class StringCommands extends BaseCommand {
         }
     }
 
-    /**
-     * Show string history
-     */
     showHistory(): void {
         if (this.stringHistory.length === 0) {
             this.printInfo('No string operations in history yet.');

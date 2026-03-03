@@ -29,9 +29,7 @@ export class CalculatorCommands extends BaseCommand {
         console.log(chalk.green(`${num1} × ${num2} = ${result}`));
     }
 
-    /**
-     * Divide two numbers
-     */
+    
     divide(num1: number, num2: number): void {
         if (num2 === 0) {
             this.printError('Division by zero is not allowed!');
@@ -42,9 +40,7 @@ export class CalculatorCommands extends BaseCommand {
         console.log(chalk.green(`${num1} ÷ ${num2} = ${result}`));
     }
 
-    /**
-     * Modulo operation
-     */
+    
     modulo(num1: number, num2: number): void {
         if (num2 === 0) {
             this.printError('Modulo by zero is not allowed!');
@@ -55,18 +51,14 @@ export class CalculatorCommands extends BaseCommand {
         console.log(chalk.green(`${num1} % ${num2} = ${result}`));
     }
 
-    /**
-     * Power operation
-     */
+    
     power(base: number, exponent: number): void {
         const result = Math.pow(base, exponent);
         this.history.push({ operation: 'power', result });
         console.log(chalk.green(`${base} ^ ${exponent} = ${result}`));
     }
 
-    /**
-     * Square root
-     */
+    
     sqrt(num: number): void {
         if (num < 0) {
             this.printError('Cannot calculate square root of negative number!');
@@ -76,9 +68,7 @@ export class CalculatorCommands extends BaseCommand {
         console.log(chalk.green(`√${num} = ${result}`));
     }
 
-    /**
-     * Show calculation history
-     */
+    
     showHistory(): void {
         if (this.history.length === 0) {
             this.printInfo('No calculations in history yet.');
@@ -90,9 +80,7 @@ export class CalculatorCommands extends BaseCommand {
         });
     }
 
-    /**
-     * Clear history
-     */
+    
     clearHistory(): void {
         this.history = [];
         this.printSuccess('History cleared!');

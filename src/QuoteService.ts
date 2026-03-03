@@ -2,18 +2,12 @@ import axios from 'axios';
 import chalk from 'chalk';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * Quote data interface for ZenQuotes
- */
 interface ZenQuote {
     q: string; // quote
     a: string; // author
     h: string; // html
 }
 
-/**
- * QuoteService class - handles Quote API integration
- */
 export class QuoteService extends BaseCommand {
     private favoriteQuotes: Array<{ quote: string; author: string }>;
 
@@ -22,9 +16,6 @@ export class QuoteService extends BaseCommand {
         this.favoriteQuotes = [];
     }
 
-    /**
-     * Get a random quote
-     */
     async getRandomQuote(): Promise<void> {
         this.printInfo('Fetching a random quote...');
 
@@ -43,9 +34,6 @@ export class QuoteService extends BaseCommand {
         }
     }
 
-    /**
-     * Get quote of the day
-     */
     async getQuoteOfTheDay(): Promise<void> {
         this.printInfo('Fetching quote of the day...');
 
@@ -64,9 +52,6 @@ export class QuoteService extends BaseCommand {
         }
     }
 
-    /**
-     * Get multiple random quotes
-     */
     async getMultipleQuotes(count: number = 5): Promise<void> {
         if (count < 1 || count > 20) {
             this.printError('Count must be between 1 and 20');
@@ -95,17 +80,11 @@ export class QuoteService extends BaseCommand {
         }
     }
 
-    /**
-     * Add quote to favorites
-     */
     addToFavorites(quote: string, author: string): void {
         this.favoriteQuotes.push({ quote, author });
         this.printSuccess('Quote added to favorites!');
     }
 
-    /**
-     * Show favorite quotes
-     */
     showFavorites(): void {
         if (this.favoriteQuotes.length === 0) {
             this.printInfo('No favorite quotes yet.');

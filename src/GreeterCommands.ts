@@ -1,9 +1,6 @@
 import chalk from 'chalk';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * GreeterCommands class - handles greeting operations
- */
 export class GreeterCommands extends BaseCommand {
     private greetedUsers: string[];
 
@@ -12,9 +9,6 @@ export class GreeterCommands extends BaseCommand {
         this.greetedUsers = [];
     }
 
-    /**
-     * Greet a user by name
-     */
     greet(name: string): void {
         if (!name) {
             this.printError('Please provide a name');
@@ -29,9 +23,6 @@ export class GreeterCommands extends BaseCommand {
         this.printInfo('Great to have you here!');
     }
 
-    /**
-     * Greet with time-based message
-     */
     greetWithTime(name: string): void {
         if (!name) {
             this.printError('Please provide a name');
@@ -54,9 +45,6 @@ export class GreeterCommands extends BaseCommand {
         console.log(`Current time: ${chalk.green(new Date().toLocaleTimeString())}`);
     }
 
-    /**
-     * Show list of greeted users
-     */
     showGreetedUsers(): void {
         if (this.greetedUsers.length === 0) {
             this.printInfo('No users greeted yet.');

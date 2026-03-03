@@ -2,9 +2,7 @@ import axios from 'axios';
 import chalk from 'chalk';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * GitHub User data interface
- */
+
 interface GitHubUser {
     login: string;
     id: number;
@@ -22,9 +20,6 @@ interface GitHubUser {
     created_at: string;
 }
 
-/**
- * Repository interface
- */
 interface GitHubRepo {
     name: string;
     description: string | null;
@@ -34,9 +29,6 @@ interface GitHubRepo {
     html_url: string;
 }
 
-/**
- * GitHubService class - handles GitHub API integration
- */
 export class GitHubService extends BaseCommand {
     private searchHistory: string[];
 
@@ -45,9 +37,6 @@ export class GitHubService extends BaseCommand {
         this.searchHistory = [];
     }
 
-    /**
-     * Get GitHub user information
-     */
     async getUserInfo(username: string): Promise<void> {
         if (!username) {
             this.printError('Please provide a GitHub username');
@@ -92,9 +81,6 @@ export class GitHubService extends BaseCommand {
         }
     }
 
-    /**
-     * Get user's repositories
-     */
     async getUserRepos(username: string, limit: number = 5): Promise<void> {
         if (!username) {
             this.printError('Please provide a GitHub username');
@@ -118,7 +104,7 @@ export class GitHubService extends BaseCommand {
 
             repos.forEach((repo: any, index: number) => {
                 console.log(`${index + 1}. ${chalk.green(repo.name)}`);
-                console.log(`    ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🔀 ${repo.language || 'N/A'}`);
+                console.log(`    ${repo.stargazers_count} | 🍴 ${repo.forks_count} |  ${repo.language || 'N/A'}`);
                 console.log(`   ${chalk.gray(repo.description || 'No description')}`);
                 console.log(`   ${chalk.cyan(repo.html_url)}`);
                 console.log(chalk.gray('─'.repeat(60)));
@@ -132,9 +118,6 @@ export class GitHubService extends BaseCommand {
         }
     }
 
-    /**
-     * Show search history
-     */
     showHistory(): void {
         if (this.searchHistory.length === 0) {
             this.printInfo('No GitHub searches yet.');

@@ -41,19 +41,12 @@ const chalk_1 = __importDefault(require("chalk"));
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const BaseCommand_1 = require("./BaseCommand");
-/**
- * FileCommands class - handles file-related operations
- */
 class FileCommands extends BaseCommand_1.BaseCommand {
     constructor() {
         super('file', 'Perform file operations');
     }
-    /**
-     * Get information about a file
-     */
     fileInfo(filePath) {
         try {
-            // Resolve the path
             const resolvedPath = path.resolve(filePath);
             // Check if file exists
             if (!fs.existsSync(resolvedPath)) {
@@ -62,7 +55,7 @@ class FileCommands extends BaseCommand_1.BaseCommand {
             }
             // Get file stats
             const stats = fs.statSync(resolvedPath);
-            console.log(chalk_1.default.blue('\n📄 File Information:'));
+            console.log(chalk_1.default.blue('\n File Information:'));
             console.log(chalk_1.default.gray('─'.repeat(40)));
             console.log(chalk_1.default.green('File Name: ') + chalk_1.default.bold(path.basename(resolvedPath)));
             console.log(chalk_1.default.green('Full Path: ') + resolvedPath);
@@ -78,9 +71,6 @@ class FileCommands extends BaseCommand_1.BaseCommand {
             this.printError(`Error reading file: ${error.message}`);
         }
     }
-    /**
-     * List files in a directory
-     */
     listFiles(dirPath) {
         try {
             const resolvedPath = path.resolve(dirPath);
@@ -93,7 +83,7 @@ class FileCommands extends BaseCommand_1.BaseCommand {
                 return;
             }
             const files = fs.readdirSync(resolvedPath);
-            console.log(chalk_1.default.blue(`\n📁 Files in ${dirPath}:`));
+            console.log(chalk_1.default.blue(`\n Files in ${dirPath}:`));
             console.log(chalk_1.default.gray('─'.repeat(40)));
             if (files.length === 0) {
                 this.printInfo('Directory is empty');
@@ -113,9 +103,6 @@ class FileCommands extends BaseCommand_1.BaseCommand {
             this.printError(`Error listing files: ${error.message}`);
         }
     }
-    /**
-     * Check if a file or directory exists
-     */
     exists(targetPath) {
         const resolvedPath = path.resolve(targetPath);
         const exists = fs.existsSync(resolvedPath);
@@ -128,9 +115,6 @@ class FileCommands extends BaseCommand_1.BaseCommand {
             this.printError(`Path does not exist: ${targetPath}`);
         }
     }
-    /**
-     * Format bytes to human readable format
-     */
     formatBytes(bytes) {
         if (bytes === 0)
             return '0 Bytes';

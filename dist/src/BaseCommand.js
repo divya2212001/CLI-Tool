@@ -5,9 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseCommand = void 0;
 const chalk_1 = __importDefault(require("chalk"));
-/**
- * Abstract base class for all CLI commands
- */
 class BaseCommand {
     constructor(name, description) {
         this.name = name;

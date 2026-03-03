@@ -6,7 +6,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = __importDefault(require("chalk"));
 const commander_1 = require("commander");
-// Import all command classes
 const CalculatorCommands_1 = require("./src/CalculatorCommands");
 const StringCommands_1 = require("./src/StringCommands");
 const FileCommands_1 = require("./src/FileCommands");
@@ -14,7 +13,6 @@ const GitHubService_1 = require("./src/GitHubService");
 const WeatherService_1 = require("./src/WeatherService");
 const QuoteService_1 = require("./src/QuoteService");
 const GreeterCommands_1 = require("./src/GreeterCommands");
-// Initialize command objects
 const calculator = new CalculatorCommands_1.CalculatorCommands();
 const stringOps = new StringCommands_1.StringCommands();
 const fileOps = new FileCommands_1.FileCommands();
@@ -22,16 +20,11 @@ const github = new GitHubService_1.GitHubService();
 const weather = new WeatherService_1.WeatherService();
 const quote = new QuoteService_1.QuoteService();
 const greeter = new GreeterCommands_1.GreeterCommands();
-// Create the main program
 const program = new commander_1.Command();
-// Set program info
 program
     .name('mycli')
     .description(chalk_1.default.blue('SESD Workshop 2 - A comprehensive CLI tool with OOP concepts'))
     .version('1.0.0');
-// ============================================
-// GREET Commands
-// ============================================
 program
     .command('greet <name>')
     .description('Greet a user by name')
@@ -50,9 +43,6 @@ program
     .action(() => {
     greeter.showGreetedUsers();
 });
-// ============================================
-// CALCULATOR Commands
-// ============================================
 program
     .command('add <num1> <num2>')
     .description('Add two numbers')
@@ -101,9 +91,6 @@ program
     .action(() => {
     calculator.showHistory();
 });
-// ============================================
-// STRING Commands
-// ============================================
 program
     .command('uppercase <text>')
     .description('Convert text to uppercase')
@@ -140,9 +127,6 @@ program
     .action((text) => {
     stringOps.palindrome(text);
 });
-// ============================================
-// FILE Commands
-// ============================================
 program
     .command('fileinfo <filename>')
     .description('Get information about a file')
@@ -161,9 +145,6 @@ program
     .action((path) => {
     fileOps.exists(path);
 });
-// ============================================
-// GITHUB Commands (API Integration)
-// ============================================
 program
     .command('github <username>')
     .description('Get GitHub user information')
@@ -176,9 +157,6 @@ program
     .action(async (username, limit) => {
     await github.getUserRepos(username, limit ? parseInt(limit) : 5);
 });
-// ============================================
-// WEATHER Commands (API Integration)
-// ============================================
 program
     .command('weather <city>')
     .description('Get weather information for a city')
@@ -191,9 +169,6 @@ program
     .action(async (city, days) => {
     await weather.getForecast(city, days ? parseInt(days) : 3);
 });
-// ============================================
-// QUOTE Commands (API Integration)
-// ============================================
 program
     .command('quote')
     .description('Get a random inspirational quote')
@@ -212,16 +187,11 @@ program
     .action(async (count) => {
     await quote.getMultipleQuotes(count ? parseInt(count) : 5);
 });
-// ============================================
-// HELP Command
-// ============================================
 program
     .command('help-all')
     .description('Show all available commands')
     .action(() => {
-    console.log(chalk_1.default.blue('\n=========================================='));
     console.log(chalk_1.default.bold('       MYCLI - Available Commands        '));
-    console.log(chalk_1.default.blue('==========================================\n'));
     console.log(chalk_1.default.cyan('GREET Commands:'));
     console.log('  greet <name>              - Greet a user');
     console.log('  greet-time <name>         - Greet with time');
@@ -256,7 +226,6 @@ program
     console.log('  quote                     - Random quote');
     console.log('  quote-today               - Quote of day');
     console.log('  quotes [count]            - Multiple quotes\n');
-    console.log(chalk_1.default.blue('==========================================\n'));
 });
 // Parse the arguments
 program.parse();

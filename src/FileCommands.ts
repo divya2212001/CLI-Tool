@@ -3,20 +3,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { BaseCommand } from './BaseCommand';
 
-/**
- * FileCommands class - handles file-related operations
- */
+
 export class FileCommands extends BaseCommand {
     constructor() {
         super('file', 'Perform file operations');
     }
 
-    /**
-     * Get information about a file
-     */
+    
     fileInfo(filePath: string): void {
         try {
-            // Resolve the path
+            
             const resolvedPath = path.resolve(filePath);
             
             // Check if file exists
@@ -28,7 +24,7 @@ export class FileCommands extends BaseCommand {
             // Get file stats
             const stats = fs.statSync(resolvedPath);
             
-            console.log(chalk.blue('\n📄 File Information:'));
+            console.log(chalk.blue('\n File Information:'));
             console.log(chalk.gray('─'.repeat(40)));
             console.log(chalk.green('File Name: ') + chalk.bold(path.basename(resolvedPath)));
             console.log(chalk.green('Full Path: ') + resolvedPath);
@@ -44,9 +40,7 @@ export class FileCommands extends BaseCommand {
         }
     }
 
-    /**
-     * List files in a directory
-     */
+    
     listFiles(dirPath: string): void {
         try {
             const resolvedPath = path.resolve(dirPath);
@@ -63,7 +57,7 @@ export class FileCommands extends BaseCommand {
 
             const files = fs.readdirSync(resolvedPath);
             
-            console.log(chalk.blue(`\n📁 Files in ${dirPath}:`));
+            console.log(chalk.blue(`\n Files in ${dirPath}:`));
             console.log(chalk.gray('─'.repeat(40)));
             
             if (files.length === 0) {
@@ -83,9 +77,6 @@ export class FileCommands extends BaseCommand {
         }
     }
 
-    /**
-     * Check if a file or directory exists
-     */
     exists(targetPath: string): void {
         const resolvedPath = path.resolve(targetPath);
         const exists = fs.existsSync(resolvedPath);
@@ -99,9 +90,6 @@ export class FileCommands extends BaseCommand {
         }
     }
 
-    /**
-     * Format bytes to human readable format
-     */
     private formatBytes(bytes: number): string {
         if (bytes === 0) return '0 Bytes';
         
